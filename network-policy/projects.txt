@@ -1,0 +1,4 @@
+oc new-project netproj-a
+oc label namespace netproj-a app=iperf3-client
+oc new-project netproj-b
+oc label namespace netproj-b app=iperf3-server

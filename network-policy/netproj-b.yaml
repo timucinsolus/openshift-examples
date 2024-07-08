@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iperf3-server-deployment
+  namespace: netproj-b
+  labels:
+    app: iperf3-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iperf3-server
+  template:
+    metadata:
+      labels:
+        app: iperf3-server
+    spec:
+      containers:
+      - name: iperf3-server
+        image: networkstatic/iperf3
+        args: ['-s']
+        ports:
+          - name: server
+            containerPort: 5201
+            protocol: TCP
+          - name: server-udp
+            containerPort: 5201
+            protocol: UDP
+      terminationGracePeriodSeconds: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: iperf3-server
+  namespace: netproj-b
+spec:
+  selector:
+    app: iperf3-server
+  ports:
+  - protocol: TCP
+    port: 5201
+    targetPort: server
+    name: server
+  - protocol: UDP
+    port: 5201
+    targetPort: server-udp
+    name: server-udp

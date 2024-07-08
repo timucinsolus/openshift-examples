@@ -1,0 +1,17 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-tcp-5201-from-netproj-a-namespace
+  namespace: netproj-b
+spec:
+  podSelector:
+    matchLabels:
+      app: iperf3-server
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 5201
+    from:
+    - namespaceSelector:
+        matchLabels:
+          app: iperf3-client
