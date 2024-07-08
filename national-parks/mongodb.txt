@@ -1,0 +1,2 @@
+oc import-image mongodb --from=quay.io/centos7/mongodb-36-centos7:master --confirm
+oc tag mongodb:latest mongodb:3.6
