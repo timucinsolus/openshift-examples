@@ -1,0 +1,8 @@
+FROM python:3.8
+RUN mkdir /app
+RUN pip install requests
+WORKDIR /app
+COPY app.py /app
+COPY a.txt /app
+RUN chmod 777 /app
+CMD ["python","-u","app.py"]
