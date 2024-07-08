@@ -1,0 +1,1 @@
+oc run load-test -n test -i --image=loadimpact/k6 --rm=true --restart=Never --  run -  < ./load-test-k6.js -e URL=$URL -e THREADS=50 -e DURATION=3m -e RAMPUP=30s -e RAMPDOWN=30s
